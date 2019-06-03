@@ -1,7 +1,6 @@
 package eu.cz.lyalinv.dto.CSV;
 
 import eu.cz.lyalinv.dto.CSV.model.CSVRow;
-import eu.cz.lyalinv.dto.ImportConverter;
 import eu.cz.lyalinv.model.Address;
 import eu.cz.lyalinv.model.Company;
 import eu.cz.lyalinv.model.DataContainer;
@@ -13,9 +12,9 @@ import java.util.List;
 /**
  * @author Lyalin Valeriy (lyalival)
  */
-public class CSVImportConverter implements ImportConverter<List<CSVRow>> {
+public class CSVImportConverter {
 
-    public DataContainer importData(List<CSVRow> inputDataList) {
+    public static DataContainer importData(List<CSVRow> inputDataList) {
         DataContainer dataContainer = new DataContainer();
 
         for ( CSVRow csvRow : inputDataList )
@@ -45,14 +44,14 @@ public class CSVImportConverter implements ImportConverter<List<CSVRow>> {
         return dataContainer;
     }
 
-    private void updateCompanyFromCSVRow ( CSVRow csvRow, Company company ){
+    private static void updateCompanyFromCSVRow ( CSVRow csvRow, Company company ){
         company.setICO(csvRow.getICO());
         company.setCompanyName(csvRow.getCompanyName());
         company.setAddress(new Address(csvRow.getStreetAddress(),csvRow.getCity(),csvRow.getCountry()));
         company.setMtime(Date.valueOf(csvRow.getMtime()));
     }
 
-    private void updateEmployeeFromCSVRow ( CSVRow csvRow, Employee employee, Company company){
+    private static void updateEmployeeFromCSVRow ( CSVRow csvRow, Employee employee, Company company){
         employee.setCompany(company);
         employee.setEmail(csvRow.getEmployeeEmail());
         employee.setFirstName(csvRow.getEmployeeName());
