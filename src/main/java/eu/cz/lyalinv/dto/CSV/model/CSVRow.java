@@ -31,7 +31,7 @@ public class CSVRow {
     @CsvBindByName(column = "email")
     private String employeeEmail;
 
-    @CsvBindByName(column = "date")
+    @CsvBindByName(column = "time")
     private String mtime;
 
     public Long getICO() {

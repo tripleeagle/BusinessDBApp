@@ -1,11 +1,11 @@
-ICO;company_name;street_address;city;country;first_name;last_name;email;time
-11783047;Edgeify;38358 East Place;Kl‡_terec nad Oh_’;Czech Republic;Carina;Martygin;cmartygin0@ftc.gov;08.05.2017
-11783047;Edgeify;38358 East Place;Kl‡_terec nad Oh_’;Czech Republic;Erl;Lebrun;elebrun1@mlb.com;25.03.2016
-11783047;Edgeify;38358 East Place;Kl‡_terec nad Oh_’;Czech Republic;Edsel;Messer;emesser2@nydailynews.com;25.02.2019
-85618914;Voolia;43855 Ramsey Court;Ciusul;Indonesia;Giulio;Comini;gcomini3@princeton.edu;07.07.2018
-85618914;Voolia;43855 Ramsey Court;Ciusul;Indonesia;Jessie;Grabeham;jgrabeham4@google.fr;06.09.2017
-85618914;Voolia;43855 Ramsey Court;Ciusul;Indonesia;Conan;Worsam;cworsam5@live.com;17.03.2019
-85618914;Voolia;43855 Ramsey Court;Ciusul;Indonesia;Esdras;Dauby;edauby6@icq.com;18.02.2019
-13276383;Livepath;43 La Follette Lane;Dalam;Indonesia;Sayre;Batchelder;sbatchelder7@rediff.com;04.07.2017
-26231527;Realmix;03473 Welch Trail;Dushanbe;Tajikistan;Reggie;Emburey;remburey8@japanpost.jp;15.07.2017
-30036632;Skinder;75328 Schmedeman Pass;Velyka Pysarivka;Ukraine;Jordan;Brims;jbrims9@webs.com;28.02.2019
+ICO,company_name,street_address,city,country,first_name,last_name,email,time
+11783047,Edgeify,38358 East Place,Kl‡_terec nad Oh_’;Czech Republic,Carina,Martygin,cmartygin0@ftc.gov,2017-05-08
+11783047,Edgeify,38358 East Place,Kl‡_terec nad Oh_’;Czech Republic,Erl,Lebrun,elebrun1@mlb.com,2016-03-25
+11783047,Edgeify,38358 East Place,Kl‡_terec nad Oh_’;Czech Republic,Edsel,Messer,emesser2@nydailynews.com,2019-02-25
+85618914,Voolia,43855 Ramsey Court,Ciusul,Indonesia,Giulio,Comini,gcomini3@princeton.edu,2018-07-07
+85618914,Voolia,43855 Ramsey Court,Ciusul,Indonesia,Jessie,Grabeham,jgrabeham4@google.fr,2017-09-06
+85618914,Voolia,43855 Ramsey Court,Ciusul,Indonesia,Conan,Worsam,cworsam5@live.com,2019-03-17
+85618914,Voolia,43855 Ramsey Court,Ciusul,Indonesia,Esdras,Dauby,edauby6@icq.com,2019-02-18
+13276383,Livepath,43 La Follette Lane,Dalam,Indonesia,Sayre,Batchelder,sbatchelder7@rediff.com,2017-07-04
+26231527,Realmix,03473 Welch Trail,Dushanbe,Tajikistan,Reggie,Emburey,remburey8@japanpost.jp,2017-07-15
+30036632,Skinder,75328 Schmedeman Pass,Velyka Pysarivka,Ukraine,Jordan,Brims,jbrims9@webs.com,2019-02-28
