@@ -1,9 +1,6 @@
 package eu.cz.lyalinv.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Lyalin Valeriy (lyalival)
@@ -20,6 +17,9 @@ public class Address {
     private String city;
 
     private String country;
+
+    @OneToOne(mappedBy = "address")
+    private Company company;
 
     public Address(){}
 
@@ -60,4 +60,8 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    public Company getCompany() { return company; }
+
+    public void setCompany(Company company) { this.company = company; }
 }

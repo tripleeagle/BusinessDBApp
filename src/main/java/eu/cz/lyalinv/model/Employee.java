@@ -22,7 +22,6 @@ public class Employee {
 
     private String email;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "companyId")
     private Company company;

@@ -1,12 +1,8 @@
 
-osquid:UselessImportCheck	"?Remove this unused import 'org.hibernate.boot.MetadataSources'.(çÂÙáÿÿÿÿÿ8©·ÆŠ²-
-asquid:UselessImportCheck"6Remove this unused import 'org.hibernate.Transaction'.(ìÌè³8©·ÆŠ²-
+qsquid:UselessImportCheck"GRemove this unused import 'javax.persistence.criteria.CriteriaBuilder'.(É¿F8³íã²-
 V
-squid:S106"9Replace this use of System.out or System.err by a logger.(ÕĞ± 8ºÄ•Š²-
-‡squid:UselessImportCheck"WRemove this unused import 'org.hibernate.boot.registry.StandardServiceRegistryBuilder'.(ƒ©¡üøÿÿÿÿ8©·ÆŠ²-
-{squid:UselessImportCheck
-"PRemove this unused import 'org.hibernate.boot.registry.StandardServiceRegistry'.(Û‹ÜŒ8©·ÆŠ²-
-]squid:S1118":Add a private constructor to hide the implicit public one.(ÁÒ„†üÿÿÿÿ8µŞ¤Š²-
-hsquid:UselessImportCheck"8Remove this unused import 'org.hibernate.boot.Metadata'.(ò•Šÿûÿÿÿÿ8©·ÆŠ²-
-isquid:UselessImportCheck"9Remove this unused import 'org.hibernate.SessionFactory'.(ñ¦«¬şÿÿÿÿ8©·ÆŠ²-
-bsquid:UselessImportCheck"2Remove this unused import 'org.hibernate.Session'.(È¹›§ùÿÿÿÿ8óÓÌŠ²-
+squid:S1062"9Replace this use of System.out or System.err by a logger.(ÕĞ± 8·×•’²-
+usquid:UselessImportCheck"ERemove this unused import 'javax.persistence.criteria.CriteriaQuery'.(ıŞ§ÿÿÿÿÿ8³íã²-
+]squid:S1118":Add a private constructor to hide the implicit public one.(ÁÒ„†üÿÿÿÿ8ªğ–‘²-
+psquid:S001176"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯°›8·×•’²-
+csquid:UselessImportCheck"3Remove this unused import 'org.hibernate.Criteria'.(öÏ¨ÿÿÿÿÿ8‘ÍÔ²-
