@@ -132,8 +132,8 @@
       <Comment>standard public schema</Comment>
       <StateNumber>359</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2019-06-04.09:25:35.953</IntrospectionTimestamp>
-      <IntrospectionStateNumber>1403</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2019-06-04.15:15:16</IntrospectionTimestamp>
+      <IntrospectionStateNumber>1523</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -194,62 +194,62 @@
       <SchemaId>11</SchemaId>
     </extension>
     <sequence id="31" parent="23" name="hibernate_sequence">
-      <ObjectId>18114</ObjectId>
+      <ObjectId>18359</ObjectId>
       <Owner>admin</Owner>
-      <StateNumber>1402</StateNumber>
+      <StateNumber>1518</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
     <table id="32" parent="23" name="address">
-      <ObjectId>18093</ObjectId>
+      <ObjectId>18361</ObjectId>
       <Owner>admin</Owner>
-      <StateNumber>1399</StateNumber>
+      <StateNumber>1522</StateNumber>
     </table>
     <table id="33" parent="23" name="company">
-      <ObjectId>18101</ObjectId>
+      <ObjectId>18369</ObjectId>
       <Owner>admin</Owner>
-      <StateNumber>1403</StateNumber>
+      <StateNumber>1522</StateNumber>
     </table>
     <table id="34" parent="23" name="employee">
-      <ObjectId>18106</ObjectId>
+      <ObjectId>18374</ObjectId>
       <Owner>admin</Owner>
-      <StateNumber>1403</StateNumber>
+      <StateNumber>1523</StateNumber>
     </table>
     <column id="35" parent="32" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1399</StateNumber>
+      <StateNumber>1519</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="36" parent="32" name="city">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>1399</StateNumber>
+      <StateNumber>1519</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="37" parent="32" name="country">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>1399</StateNumber>
+      <StateNumber>1519</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="38" parent="32" name="street">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>1399</StateNumber>
+      <StateNumber>1519</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="39" parent="32" name="address_pkey">
-      <ObjectId>18099</ObjectId>
-      <StateNumber>1399</StateNumber>
+      <ObjectId>18367</ObjectId>
+      <StateNumber>1519</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="40" parent="32" name="address_pkey">
-      <ObjectId>18100</ObjectId>
-      <StateNumber>1399</StateNumber>
+      <ObjectId>18368</ObjectId>
+      <StateNumber>1519</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>address_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
@@ -258,95 +258,111 @@
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1400</StateNumber>
+      <StateNumber>1520</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="42" parent="33" name="ico">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
-      <StateNumber>1400</StateNumber>
+      <StateNumber>1520</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="43" parent="33" name="companyname">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>1400</StateNumber>
+      <StateNumber>1520</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="44" parent="33" name="mtime">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>1400</StateNumber>
+      <StateNumber>1520</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="45" parent="33" name="company_pkey">
-      <ObjectId>18104</ObjectId>
-      <StateNumber>1400</StateNumber>
+    <column id="45" parent="33" name="address_id">
+      <Position>5</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>1520</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <index id="46" parent="33" name="company_pkey">
+      <ObjectId>18372</ObjectId>
+      <StateNumber>1520</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="46" parent="33" name="company_pkey">
-      <ObjectId>18105</ObjectId>
-      <StateNumber>1400</StateNumber>
+    <key id="47" parent="33" name="company_pkey">
+      <ObjectId>18373</ObjectId>
+      <StateNumber>1520</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>company_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="47" parent="34" name="id">
+    <foreign-key id="48" parent="33" name="fkn6u8jp11ac07ya5eda2agod5o">
+      <ObjectId>18382</ObjectId>
+      <StateNumber>1522</StateNumber>
+      <ColNames>address_id</ColNames>
+      <RefTableId>18361</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>address</RefTableName>
+      <RefKeyName>address_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="49" parent="34" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1401</StateNumber>
+      <StateNumber>1521</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="48" parent="34" name="email">
+    <column id="50" parent="34" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>1401</StateNumber>
+      <StateNumber>1521</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="49" parent="34" name="firstname">
+    <column id="51" parent="34" name="firstname">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>1401</StateNumber>
+      <StateNumber>1521</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="50" parent="34" name="lastname">
+    <column id="52" parent="34" name="lastname">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>1401</StateNumber>
+      <StateNumber>1521</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="51" parent="34" name="mtime">
+    <column id="53" parent="34" name="mtime">
       <Position>5</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>1401</StateNumber>
+      <StateNumber>1521</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="52" parent="34" name="companyid">
+    <column id="54" parent="34" name="companyid">
       <Position>6</Position>
       <DataType>bigint|0s</DataType>
-      <StateNumber>1401</StateNumber>
+      <StateNumber>1521</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="53" parent="34" name="employee_pkey">
-      <ObjectId>18112</ObjectId>
-      <StateNumber>1401</StateNumber>
+    <index id="55" parent="34" name="employee_pkey">
+      <ObjectId>18380</ObjectId>
+      <StateNumber>1521</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="54" parent="34" name="employee_pkey">
-      <ObjectId>18113</ObjectId>
-      <StateNumber>1401</StateNumber>
+    <key id="56" parent="34" name="employee_pkey">
+      <ObjectId>18381</ObjectId>
+      <StateNumber>1521</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>employee_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="55" parent="34" name="fknv14nqg36o7sv4uq1t9fh16pe">
-      <ObjectId>18116</ObjectId>
-      <StateNumber>1403</StateNumber>
+    <foreign-key id="57" parent="34" name="fknv14nqg36o7sv4uq1t9fh16pe">
+      <ObjectId>18387</ObjectId>
+      <StateNumber>1523</StateNumber>
       <ColNames>companyid</ColNames>
-      <RefTableId>18101</RefTableId>
+      <RefTableId>18369</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>company</RefTableName>
       <RefKeyName>company_pkey</RefKeyName>

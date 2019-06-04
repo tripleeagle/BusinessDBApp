@@ -3,15 +3,12 @@ package eu.cz.lyalinv.controller;
 import eu.cz.lyalinv.model.Company;
 import eu.cz.lyalinv.model.DataContainer;
 import eu.cz.lyalinv.utils.model.Stat;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +28,7 @@ public class DBController {
         for (Map.Entry<Long,Company> entry : dataContainer.getCompanyMap().entrySet() ) {
             Company oldCompany = getCompanyFromDBByICO(session,entry.getKey());
             Company newCompany = entry.getValue();
-            if ( oldCompany != null && oldCompany.getMtime().compareTo(newCompany.getMtime()) <= 0 ){
+            if ( oldCompany != null && oldCompany.getMtime().compareTo(newCompany.getMtime()) < 0 ){
                 Object o = session.load(Company.class,oldCompany.getId());
                 oldCompany = (Company) o;
                 oldCompany.setMtime(newCompany.getMtime());
@@ -53,7 +50,8 @@ public class DBController {
 
     private static Company getCompanyFromDBByICO ( Session session, Long ICO ){
         Company company = new Company();
-        List<Object[]> rows = session.createQuery("select ICO, mtime, id from Company c where c.ICO=ICO").list();
+        String query = "select ICO, mtime, id from Company c where c.ICO=" + ICO;
+        List<Object[]> rows = session.createQuery(query).list();
         for(Object[] row : rows){
             company.setICO(ICO);
             String[] splitted = row[1].toString().split(" ");

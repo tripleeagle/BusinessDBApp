@@ -25,7 +25,7 @@ public class CSVImportConverter {
                 updateCompanyFromCSVRow(csvRow,company);
                 dataContainer.addCompany(company);
             }
-            else if (Date.valueOf(csvRow.getMtime()).compareTo(company.getMtime()) <= 0 ){
+            else if (Date.valueOf(csvRow.getMtime()).compareTo(company.getMtime()) > 0 ){
                 updateCompanyFromCSVRow(csvRow,company);
                 dataContainer.addCompany(company);
             }
@@ -36,7 +36,7 @@ public class CSVImportConverter {
                 updateEmployeeFromCSVRow(csvRow,employee,company);
                 dataContainer.addEmployee(employee);
             }
-            else if (Date.valueOf(csvRow.getMtime()).compareTo(employee.getMtime()) <= 0 ) {
+            else if (Date.valueOf(csvRow.getMtime()).compareTo(employee.getMtime()) > 0 ) {
                 updateEmployeeFromCSVRow(csvRow,employee,company);
                 dataContainer.addEmployee(employee);
             }
