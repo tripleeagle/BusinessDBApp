@@ -89,4 +89,15 @@ public class Company {
     public int hashCode() {
         return Objects.hash(ICO);
     }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", ICO=" + ICO +
+                ", companyName='" + companyName + '\'' +
+                ", address=" + address +
+                ", mtime=" + mtime +
+                '}';
+    }
 }

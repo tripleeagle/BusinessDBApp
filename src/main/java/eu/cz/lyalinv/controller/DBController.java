@@ -46,9 +46,6 @@ public class DBController {
             else if ( oldCompany.getMtime().compareTo(newCompany.getMtime()) == 0 ){
                 isPotentialDuplicate = true;
             }
-            if ( oldCompany != null && oldCompany.getMtime() != null &&  newCompany.getMtime() != null) {
-                System.out.println("ICO = " + oldCompany.getICO() + "OLD = " + oldCompany.getMtime().toString() + " | NEW = " + newCompany.getMtime().toString());
-            }
         }
 
         for ( Employee newEmployee : dataContainer.getEmployeeList() ) {
@@ -95,6 +92,26 @@ public class DBController {
             entityManagerFactory.close();
         }
         return employees;
+    }
+
+    public static List<Company> getCompaines (){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.businessdbapp.jpa");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Session session = entityManager.unwrap(Session.class);
+        Transaction tx = null;
+        List<Company> companies = null;
+        try {
+            tx = session.beginTransaction();
+            companies = session.createQuery("FROM Company").list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+            entityManagerFactory.close();
+        }
+        return companies;
     }
 
     private static void updateCompany ( Company oldCompany, Company newCompany){

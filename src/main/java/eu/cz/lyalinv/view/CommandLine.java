@@ -2,7 +2,9 @@ package eu.cz.lyalinv.view;
 
 import eu.cz.lyalinv.controller.DBController;
 import eu.cz.lyalinv.controller.ImportController;
+import eu.cz.lyalinv.model.Company;
 import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.model.Employee;
 import eu.cz.lyalinv.utils.model.Stat;
 
 import java.util.Scanner;
@@ -38,6 +40,12 @@ public class CommandLine {
         System.out.println("Count of modified employees = " + stat.modifiedEmployee);
         System.out.println("Count of duplicate records = " + stat.duplication);
 
+        System.out.println("Companies:");
+        for (Company company : DBController.getCompaines())
+            System.out.println(company.toString());
 
+        System.out.println("Employees:");
+        for (Employee employee : DBController.getEmployees())
+            System.out.println(employee.toString());
     }
 }
