@@ -19,11 +19,13 @@ public class CommandLine {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             inputPath = sc.next();
+            break;
         }
 
         System.out.println("Now, please, enter the output directory:");
         while (sc.hasNext()) {
             outPath = sc.next();
+            break;
         }
 
         DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(inputPath, outPath);

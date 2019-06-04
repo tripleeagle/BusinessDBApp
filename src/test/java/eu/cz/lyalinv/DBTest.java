@@ -6,15 +6,8 @@ import eu.cz.lyalinv.model.DataContainer;
 import eu.cz.lyalinv.model.Employee;
 import eu.cz.lyalinv.utils.model.Stat;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,6 +19,7 @@ public class DBTest {
     private static String resourcesFolder = "BusinessDBApp/src/test/resources/";
     private static String input = "inputs/csv_inputs/";
     private static String duplicatesInput = "inputs/csv_inputs_duplicates_test/";
+    private static String modificationsInput = "inputs/csv_inputs_modification_test/";
     private static String out = "out";
 
     /**
@@ -34,7 +28,7 @@ public class DBTest {
     @Test
     public void testImportAndStore (){
         DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + input, projectsFolder + resourcesFolder + out);
-        ImportCSVTest.moveFilesBack();
+        ImportCSVTest.moveFilesBack(input);
         DBController.storeData(dataContainer);
     }
 
@@ -45,7 +39,7 @@ public class DBTest {
     @Test
     public void testImportAndStoreAndEmployeeList () {
         DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + input, projectsFolder + resourcesFolder + out);
-        ImportCSVTest.moveFilesBack();
+        ImportCSVTest.moveFilesBack(input);
         DBController.storeData(dataContainer);
         List<Employee> employeeList = DBController.getEmployees();
         assertEquals(17,employeeList.size());
@@ -57,12 +51,12 @@ public class DBTest {
     }
 
     /**
-     * @note Number of duplicates depends on order of the file, so for testing duplicate there is another test
+     * @note Number of duplicates depends on order of the file, so for testing duplicate and modification there is another test
      */
     @Test
     public void testStat (){
         DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + input, projectsFolder + resourcesFolder + out);
-        ImportCSVTest.moveFilesBack();
+        ImportCSVTest.moveFilesBack(input);
         Stat stat = DBController.storeData(dataContainer);
         assertEquals(9,stat.insertedCompany);
         assertEquals(17,stat.insertedEmployee);
@@ -71,11 +65,26 @@ public class DBTest {
     @Test
     public void testDuplicates (){
         DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + duplicatesInput, projectsFolder + resourcesFolder + out);
-        moveDuplicatesBack();
+        ImportCSVTest.moveFilesBack(duplicatesInput);
         Stat stat = DBController.storeData(dataContainer);
         assertEquals(1,stat.insertedCompany);
         assertEquals(3,stat.insertedEmployee);
         assertEquals(3,stat.duplication);
+    }
+
+    /**
+     * @note Company and Employee modifies every time after adding the record with a new newer date
+     */
+    @Test
+    public void testModifications (){
+        DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + modificationsInput, projectsFolder + resourcesFolder + out);
+        ImportCSVTest.moveFilesBack(modificationsInput);
+        Stat stat = DBController.storeData(dataContainer);
+        assertEquals(2,stat.insertedCompany);
+        assertEquals(2,stat.insertedEmployee);
+        assertEquals(2,stat.modifiedCompany);
+        assertEquals(2,stat.modifiedEmployee);
+        assertEquals(0,stat.duplication);
     }
 
     private List<String> getEmployeeNameList ( List<Employee> employeeList){
@@ -107,16 +116,4 @@ public class DBTest {
         return employeeNameList;
     }
 
-    public static void moveDuplicatesBack (){
-        try (Stream<Path> walk = Files.walk(Paths.get(projectsFolder + resourcesFolder + out))) {
-            List<String> files = walk.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.toList());
-            for ( String file : files ){
-                String[] splitted = file.split("/");
-                String fileName = splitted[splitted.length - 1];
-                Path temp = Files.move (Paths.get(file), Paths.get(projectsFolder + resourcesFolder + duplicatesInput + "/" + fileName));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

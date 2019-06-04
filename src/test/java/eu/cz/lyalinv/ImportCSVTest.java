@@ -32,20 +32,20 @@ public class ImportCSVTest {
     @Test
     public void testImportCSV (){
         DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + input, projectsFolder + resourcesFolder + out);
-        moveFilesBack();
+        moveFilesBack(input);
         assertNotNull(dataContainer);
         assertNotNull(dataContainer.getCompanyList());
         assertNotNull(dataContainer.getEmployeeList());
     }
 
 
-    public static void moveFilesBack (){
+    public static void moveFilesBack (String inputFolder){
         try (Stream<Path> walk = Files.walk(Paths.get(projectsFolder + resourcesFolder + out))) {
             List<String> files = walk.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.toList());
             for ( String file : files ){
                 String[] splitted = file.split("/");
                 String fileName = splitted[splitted.length - 1];
-                Path temp = Files.move (Paths.get(file), Paths.get(projectsFolder + resourcesFolder + input + "/" + fileName));
+                Path temp = Files.move (Paths.get(file), Paths.get(projectsFolder + resourcesFolder + inputFolder + "/" + fileName));
             }
         } catch (IOException e) {
             e.printStackTrace();
