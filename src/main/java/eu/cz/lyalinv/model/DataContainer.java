@@ -33,7 +33,7 @@ public class DataContainer {
     }
 
     public void addEmployee (Employee employee){
-        employeeMap.put(employee.getFirstName() + employee.getLastName(),employee);
+        employeeMap.put(employee.getEmail(),employee);
     }
 
     public void setEmployeeMap(Map<String, Employee> employeeMap) {

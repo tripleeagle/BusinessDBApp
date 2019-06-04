@@ -30,7 +30,7 @@ public class CSVImportConverter {
                 dataContainer.addCompany(company);
             }
 
-            Employee employee = dataContainer.getEmployeeMap().get(csvRow.getEmployeeName()+csvRow.getEmployeeLastName());
+            Employee employee = dataContainer.getEmployeeMap().get(csvRow.getEmployeeEmail());
             if ( employee == null ){
                 employee = new Employee();
                 updateEmployeeFromCSVRow(csvRow,employee,company);

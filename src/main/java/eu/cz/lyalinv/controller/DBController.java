@@ -2,6 +2,7 @@ package eu.cz.lyalinv.controller;
 
 import eu.cz.lyalinv.model.Company;
 import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.model.Employee;
 import eu.cz.lyalinv.utils.model.Stat;
 import org.hibernate.Session;
 
@@ -35,10 +36,30 @@ public class DBController {
                 oldCompany.setAddress(newCompany.getAddress());
                 oldCompany.setCompanyName(newCompany.getCompanyName());
                 session.update(oldCompany);
+                stat.modifiedCompany++;
             }
             else {
                 entityManager.persist(entry.getValue());
                 stat.insertedCompany++;
+            }
+        }
+
+        for (Map.Entry<String, Employee> entry : dataContainer.getEmployeeMap().entrySet() ) {
+            Employee oldEmployee = getEmployeeByEmail(session,entry.getValue().getEmail());
+            Employee newEpmloyee = entry.getValue();
+            if ( oldEmployee != null && oldEmployee.getMtime().compareTo(newEpmloyee.getMtime()) < 0 ){
+                Object o = session.load(Company.class,oldEmployee.getId());
+                oldEmployee = (Employee) o;
+                oldEmployee.setMtime(newEpmloyee.getMtime());
+                oldEmployee.setFirstName(newEpmloyee.getFirstName());
+                oldEmployee.setLastName(newEpmloyee.getLastName());
+                oldEmployee.setCompany(newEpmloyee.getCompany());
+                session.update(oldEmployee);
+                stat.modifiedEmployee++;
+            }
+            else {
+                entityManager.persist(entry.getValue());
+                stat.insertedEmployee++;
             }
         }
         transaction.commit();
@@ -50,8 +71,9 @@ public class DBController {
 
     private static Company getCompanyFromDBByICO ( Session session, Long ICO ){
         Company company = new Company();
-        String query = "select ICO, mtime, id from Company c where c.ICO=" + ICO;
-        List<Object[]> rows = session.createQuery(query).list();
+        String query = "" + ICO;
+        List<Object[]> rows = session.createQuery("select ICO, mtime, id from Company c where c.ICO = :ICOArg")
+                                .setParameter("ICOArg",ICO).list();
         for(Object[] row : rows){
             company.setICO(ICO);
             String[] splitted = row[1].toString().split(" ");
@@ -59,5 +81,18 @@ public class DBController {
             company.setId(Long.parseLong(row[2].toString()));
         }
         return company.getMtime() == null ? null : company;
+    }
+
+    private static Employee getEmployeeByEmail ( Session session, String email ){
+        Employee employee = new Employee();
+        String query = "select mtime, id from Employee e where e.email like " + email;
+        List<Object[]> rows = session.createQuery("select mtime, id from Employee e where e.email like :emailArg")
+                                    .setParameter("emailArg",email).list();
+        for(Object[] row : rows){
+            String[] splitted = row[0].toString().split(" ");
+            employee.setMtime(Date.valueOf(splitted[0]));
+            employee.setId(Long.parseLong(row[1].toString()));
+        }
+        return employee.getMtime() == null ? null : employee;
     }
 }
