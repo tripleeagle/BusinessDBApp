@@ -12,7 +12,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Lyalin Valeriy (lyalival)
@@ -28,9 +27,8 @@ public class DBController {
         EntityTransaction transaction = entityManager.getTransaction();
 
         transaction.begin();
-        for (Map.Entry<Long,Company> entry : dataContainer.getCompanyMap().entrySet() ) {
-            Company oldCompany = getCompanyFromDBByICO(session,entry.getKey());
-            Company newCompany = entry.getValue();
+        for (Company newCompany: dataContainer.getCompanyList() ) {
+            Company oldCompany = getCompanyFromDBByICO(session,newCompany.getICO());
             if ( oldCompany != null && oldCompany.getMtime().compareTo(newCompany.getMtime()) < 0 ){
                 Object oldCompanyObj = session.load(Company.class,oldCompany.getId());
                 oldCompany = (Company) oldCompanyObj;
@@ -39,7 +37,7 @@ public class DBController {
                 stat.modifiedCompany++;
             }
             else if ( oldCompany == null ){
-                entityManager.persist(entry.getValue());
+                entityManager.persist(newCompany);
                 stat.insertedCompany++;
             }
             else if ( oldCompany.getMtime().compareTo(newCompany.getMtime()) == 0 ){
@@ -48,17 +46,17 @@ public class DBController {
 
         }
 
-        for (Map.Entry<String, Employee> entry : dataContainer.getEmployeeMap().entrySet() ) {
-            Employee oldEmployee = getEmployeeByEmail(session,entry.getValue().getEmail());
-            Employee newEmployee = entry.getValue();
+        for ( Employee newEmployee : dataContainer.getEmployeeList() ) {
+            Employee oldEmployee = getEmployeeByEmail(session,newEmployee.getEmail());
             if ( oldEmployee != null && oldEmployee.getMtime().compareTo(newEmployee.getMtime()) < 0 ){
-                Object oldEmployeeObj = session.load(Company.class,oldEmployee.getId());
+                Object oldEmployeeObj = session.load(Employee.class,oldEmployee.getId());
                 oldEmployee = (Employee) oldEmployeeObj;
                 updateEmployee(oldEmployee,newEmployee,session);
                 session.update(oldEmployee);
                 stat.modifiedEmployee++;
             }
             else if ( oldEmployee == null ){
+                //Change company to the newest company, that has been stored in DB
                 newEmployee.setCompany(getCompanyFromDBByICO(session,newEmployee.getCompany().getICO()));
                 entityManager.persist(newEmployee);
                 stat.insertedEmployee++;

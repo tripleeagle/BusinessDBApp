@@ -1,42 +1,41 @@
 package eu.cz.lyalinv.model;
 
-import javax.persistence.Entity;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Lyalin Valeriy (lyalival)
  */
 public class DataContainer {
-    Map<Long,Company> companyMap;
-    Map<String,Employee> employeeMap;
+    List<Company> companyList;
+    List<Employee> employeeList;
 
     public DataContainer () {
-        companyMap = new HashMap();
-        employeeMap = new HashMap();
+        companyList= new ArrayList();
+        employeeList = new ArrayList();
     }
 
-    public Map<Long, Company> getCompanyMap() {
-        return companyMap;
-    }
 
     public void addCompany (Company company) {
-        companyMap.put(company.getICO(),company);
+        companyList.add(company);
     }
 
-    public void setCompanyMap(Map<Long, Company> companyMap) {
-        this.companyMap = companyMap;
+
+    public void addEmployee (Employee employee){ employeeList.add(employee); }
+
+    public List<Company> getCompanyList() {
+        return companyList;
     }
 
-    public Map<String, Employee> getEmployeeMap() {
-        return employeeMap;
+    public void setCompanyList(List<Company> companyList) {
+        this.companyList = companyList;
     }
 
-    public void addEmployee (Employee employee){
-        employeeMap.put(employee.getEmail(),employee);
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
-    public void setEmployeeMap(Map<String, Employee> employeeMap) {
-        this.employeeMap = employeeMap;
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 }

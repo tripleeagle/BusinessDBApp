@@ -30,8 +30,8 @@ public class ImportCSVTest {
         DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + input, projectsFolder + resourcesFolder + out);
         moveFilesBack();
         assertNotNull(dataContainer);
-        assertNotNull(dataContainer.getEmployeeMap());
-        assertNotNull(dataContainer.getCompanyMap());
+        assertNotNull(dataContainer.getCompanyList());
+        assertNotNull(dataContainer.getEmployeeList());
         DBController.storeData(dataContainer);
     }
 
