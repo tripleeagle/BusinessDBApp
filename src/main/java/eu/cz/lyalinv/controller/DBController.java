@@ -46,6 +46,9 @@ public class DBController {
             else if ( oldCompany.getMtime().compareTo(newCompany.getMtime()) == 0 ){
                 isPotentialDuplicate = true;
             }
+            if ( oldCompany != null && oldCompany.getMtime() != null &&  newCompany.getMtime() != null) {
+                System.out.println("ICO = " + oldCompany.getICO() + "OLD = " + oldCompany.getMtime().toString() + " | NEW = " + newCompany.getMtime().toString());
+            }
         }
 
         for ( Employee newEmployee : dataContainer.getEmployeeList() ) {
