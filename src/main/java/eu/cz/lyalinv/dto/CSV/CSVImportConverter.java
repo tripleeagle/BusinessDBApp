@@ -19,44 +19,31 @@ public class CSVImportConverter {
 
         for ( CSVRow csvRow : inputDataList )
         {
-            Company company = dataContainer.getCompanyMap().get(csvRow.getICO());
-            if ( company == null ) {
-                company = new Company();
-                updateCompanyFromCSVRow(csvRow,company);
-                dataContainer.addCompany(company);
-            }
-            else if (Date.valueOf(csvRow.getMtime()).compareTo(company.getMtime()) > 0 ){
-                updateCompanyFromCSVRow(csvRow,company);
-                dataContainer.addCompany(company);
-            }
+            Company company = getCompanyFromCSVRow(csvRow);
+            dataContainer.addCompany(company);
 
-            Employee employee = dataContainer.getEmployeeMap().get(csvRow.getEmployeeEmail());
-            if ( employee == null ){
-                employee = new Employee();
-                updateEmployeeFromCSVRow(csvRow,employee,company);
-                dataContainer.addEmployee(employee);
-            }
-            else if (Date.valueOf(csvRow.getMtime()).compareTo(employee.getMtime()) > 0 ) {
-                updateEmployeeFromCSVRow(csvRow,employee,company);
-                dataContainer.addEmployee(employee);
-            }
+            Employee employee = getEmployeeFromCSVRow(csvRow,company);
+            dataContainer.addEmployee(employee);
         }
         return dataContainer;
     }
 
-    private static void updateCompanyFromCSVRow ( CSVRow csvRow, Company company ){
+    private static Company getCompanyFromCSVRow ( CSVRow csvRow ){
+        Company company = new Company();
         company.setICO(csvRow.getICO());
         company.setCompanyName(csvRow.getCompanyName());
         company.setAddress(new Address(csvRow.getStreetAddress(),csvRow.getCity(),csvRow.getCountry()));
         company.setMtime(Date.valueOf(csvRow.getMtime()));
+        return company;
     }
 
-    private static void updateEmployeeFromCSVRow ( CSVRow csvRow, Employee employee, Company company){
+    private static Employee getEmployeeFromCSVRow ( CSVRow csvRow, Company company){
+        Employee employee = new Employee();
         employee.setCompany(company);
         employee.setEmail(csvRow.getEmployeeEmail());
         employee.setFirstName(csvRow.getEmployeeName());
         employee.setLastName(csvRow.getEmployeeLastName());
         employee.setMtime(Date.valueOf(csvRow.getMtime()));
-        company.getEmployees().add(employee);
+        return employee;
     }
 }

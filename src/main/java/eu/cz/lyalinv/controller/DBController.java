@@ -20,6 +20,8 @@ import java.util.Map;
 public class DBController {
     public static Stat storeData (DataContainer dataContainer){
         Stat stat = new Stat();
+        boolean isPotentialDuplicate = false;
+
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.businessdbapp.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Session session = entityManager.unwrap(Session.class);
@@ -30,37 +32,41 @@ public class DBController {
             Company oldCompany = getCompanyFromDBByICO(session,entry.getKey());
             Company newCompany = entry.getValue();
             if ( oldCompany != null && oldCompany.getMtime().compareTo(newCompany.getMtime()) < 0 ){
-                Object o = session.load(Company.class,oldCompany.getId());
-                oldCompany = (Company) o;
-                oldCompany.setMtime(newCompany.getMtime());
-                oldCompany.setAddress(newCompany.getAddress());
-                oldCompany.setCompanyName(newCompany.getCompanyName());
+                Object oldCompanyObj = session.load(Company.class,oldCompany.getId());
+                oldCompany = (Company) oldCompanyObj;
+                updateCompany(oldCompany, newCompany);
                 session.update(oldCompany);
                 stat.modifiedCompany++;
             }
-            else {
+            else if ( oldCompany == null ){
                 entityManager.persist(entry.getValue());
                 stat.insertedCompany++;
             }
+            else if ( oldCompany.getMtime().compareTo(newCompany.getMtime()) == 0 ){
+                isPotentialDuplicate = true;
+            }
+
         }
 
         for (Map.Entry<String, Employee> entry : dataContainer.getEmployeeMap().entrySet() ) {
             Employee oldEmployee = getEmployeeByEmail(session,entry.getValue().getEmail());
-            Employee newEpmloyee = entry.getValue();
-            if ( oldEmployee != null && oldEmployee.getMtime().compareTo(newEpmloyee.getMtime()) < 0 ){
-                Object o = session.load(Company.class,oldEmployee.getId());
-                oldEmployee = (Employee) o;
-                oldEmployee.setMtime(newEpmloyee.getMtime());
-                oldEmployee.setFirstName(newEpmloyee.getFirstName());
-                oldEmployee.setLastName(newEpmloyee.getLastName());
-                oldEmployee.setCompany(newEpmloyee.getCompany());
+            Employee newEmployee = entry.getValue();
+            if ( oldEmployee != null && oldEmployee.getMtime().compareTo(newEmployee.getMtime()) < 0 ){
+                Object oldEmployeeObj = session.load(Company.class,oldEmployee.getId());
+                oldEmployee = (Employee) oldEmployeeObj;
+                updateEmployee(oldEmployee,newEmployee,session);
                 session.update(oldEmployee);
                 stat.modifiedEmployee++;
             }
-            else {
-                entityManager.persist(entry.getValue());
+            else if ( oldEmployee == null ){
+                newEmployee.setCompany(getCompanyFromDBByICO(session,newEmployee.getCompany().getICO()));
+                entityManager.persist(newEmployee);
                 stat.insertedEmployee++;
             }
+            else if ( oldEmployee.getMtime().compareTo(newEmployee.getMtime()) == 0 && isPotentialDuplicate){
+                stat.duplication++;
+            }
+
         }
         transaction.commit();
 
@@ -69,9 +75,21 @@ public class DBController {
         return stat;
     }
 
+    private static void updateCompany ( Company oldCompany, Company newCompany){
+        oldCompany.setMtime(newCompany.getMtime());
+        oldCompany.setAddress(newCompany.getAddress());
+        oldCompany.setCompanyName(newCompany.getCompanyName());
+    }
+
+    private static void updateEmployee ( Employee oldEmployee, Employee newEmployee, Session session ){
+        oldEmployee.setMtime(newEmployee.getMtime());
+        oldEmployee.setFirstName(newEmployee.getFirstName());
+        oldEmployee.setLastName(newEmployee.getLastName());
+        oldEmployee.setCompany(getCompanyFromDBByICO(session,newEmployee.getCompany().getICO()));
+    }
+
     private static Company getCompanyFromDBByICO ( Session session, Long ICO ){
         Company company = new Company();
-        String query = "" + ICO;
         List<Object[]> rows = session.createQuery("select ICO, mtime, id from Company c where c.ICO = :ICOArg")
                                 .setParameter("ICOArg",ICO).list();
         for(Object[] row : rows){
@@ -85,7 +103,6 @@ public class DBController {
 
     private static Employee getEmployeeByEmail ( Session session, String email ){
         Employee employee = new Employee();
-        String query = "select mtime, id from Employee e where e.email like " + email;
         List<Object[]> rows = session.createQuery("select mtime, id from Employee e where e.email like :emailArg")
                                     .setParameter("emailArg",email).list();
         for(Object[] row : rows){

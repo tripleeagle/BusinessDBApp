@@ -9,6 +9,7 @@ public class Stat {
     public int insertedEmployee;
     public int modifiedEmployee;
     public int duplication;
+    public int cntImportedFiles;
 
     public Stat () {
         insertedCompany = 0;
@@ -16,6 +17,7 @@ public class Stat {
         insertedEmployee = 0;
         modifiedEmployee = 0;
         duplication = 0;
+        cntImportedFiles = 0;
     }
 
 }
