@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String street;
@@ -21,7 +21,8 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Company company;
 
-    public Address(){}
+    public Address() {
+    }
 
     public Address(String street, String city, String country) {
         this.street = street;
@@ -61,9 +62,13 @@ public class Address {
         this.country = country;
     }
 
-    public Company getCompany() { return company; }
+    public Company getCompany() {
+        return company;
+    }
 
-    public void setCompany(Company company) { this.company = company; }
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     @Override
     public String toString() {

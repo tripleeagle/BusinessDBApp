@@ -16,7 +16,7 @@ public class CommandLine {
 
     public static void main(String[] args) {
         System.out.println("Enter the path to CSV files:");
-        String inputPath = null ;
+        String inputPath = null;
         String outPath = null;
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {

@@ -21,24 +21,24 @@ import java.util.stream.Stream;
 public class ImportController {
     /**
      * Iterates all the files in the @inputPathToDirectory folder
+     *
      * @param inputPathToDirectory - path to the folder, where is located input files
-     * @param outPath - path to the folder, where will stored files, which have been already imported
+     * @param outPath              - path to the folder, where will stored files, which have been already imported
      * @return DataContainer, which contains all the imported data
      */
-    public static DataContainer importCSVFromFolderAndMove(String inputPathToDirectory, String outPath ){
+    public static DataContainer importCSVFromFolderAndMove(String inputPathToDirectory, String outPath) {
         DataContainer dataContainer = new DataContainer();
         List<CSVRow> csvRows = new ArrayList<>();
         try (Stream<Path> walk = Files.walk(Paths.get(inputPathToDirectory))) {
             List<String> files = walk.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.toList());
 
-            for ( String filePath: files )
-            {
+            for (String filePath : files) {
                 Reader reader = Files.newBufferedReader(Paths.get(filePath));
                 List<CSVRow> csvRowsInFile = new CsvToBeanBuilder(reader).withType(CSVRow.class).build().parse();
 
                 csvRows.addAll(csvRowsInFile);
-                if ( !moveFile(filePath,outPath) )
-                   System.err.println("OutPath doesn't exist");
+                if (!moveFile(filePath, outPath))
+                    System.err.println("OutPath doesn't exist");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,10 +46,10 @@ public class ImportController {
         return CSVImportConverter.importData(csvRows);
     }
 
-    private static boolean moveFile ( String inputPath, String outPath ) throws IOException {
+    private static boolean moveFile(String inputPath, String outPath) throws IOException {
         String[] splitted = inputPath.split("/");
         String fileName = splitted[splitted.length - 1];
-        Path temp = Files.move (Paths.get(inputPath),
+        Path temp = Files.move(Paths.get(inputPath),
                 Paths.get(outPath + "/" + fileName));
 
         return temp == null ? false : true;

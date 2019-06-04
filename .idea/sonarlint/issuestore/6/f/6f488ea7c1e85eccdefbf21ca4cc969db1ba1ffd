@@ -1,7 +1,0 @@
-
-"squid:ClassVariableVisibilityCheck"[Make insertedCompany a static final constant or non-public and provide accessors if needed.(‰´›Ü8¥µê‘²-
-•"squid:ClassVariableVisibilityCheck"[Make modifiedCompany a static final constant or non-public and provide accessors if needed.(›ÕŸúÿÿÿÿ8¥µê‘²-
-–"squid:ClassVariableVisibilityCheck	"\Make insertedEmployee a static final constant or non-public and provide accessors if needed.(¡ÿåšùÿÿÿÿ8¥µê‘²-
-‘"squid:ClassVariableVisibilityCheck
-"\Make modifiedEmployee a static final constant or non-public and provide accessors if needed.(È©ªÁ8¥µê‘²-
-‘"squid:ClassVariableVisibilityCheck"WMake duplication a static final constant or non-public and provide accessors if needed.(ŞÎÄ÷üÿÿÿÿ8¥µê‘²-

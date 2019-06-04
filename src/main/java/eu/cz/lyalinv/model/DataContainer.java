@@ -10,18 +10,20 @@ public class DataContainer {
     List<Company> companyList;
     List<Employee> employeeList;
 
-    public DataContainer () {
-        companyList= new ArrayList();
+    public DataContainer() {
+        companyList = new ArrayList();
         employeeList = new ArrayList();
     }
 
 
-    public void addCompany (Company company) {
+    public void addCompany(Company company) {
         companyList.add(company);
     }
 
 
-    public void addEmployee (Employee employee){ employeeList.add(employee); }
+    public void addEmployee(Employee employee) {
+        employeeList.add(employee);
+    }
 
     public List<Company> getCompanyList() {
         return companyList;

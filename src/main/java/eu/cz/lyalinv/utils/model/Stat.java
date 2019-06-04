@@ -11,7 +11,7 @@ public class Stat {
     public int duplication;
     public int cntImportedFiles;
 
-    public Stat () {
+    public Stat() {
         insertedCompany = 0;
         modifiedCompany = 0;
         insertedEmployee = 0;

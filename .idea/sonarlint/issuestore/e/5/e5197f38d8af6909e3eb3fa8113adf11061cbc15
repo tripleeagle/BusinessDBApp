@@ -1,8 +1,0 @@
-
-qsquid:UselessImportCheck"GRemove this unused import 'javax.persistence.criteria.CriteriaBuilder'.(É¿F8³íã²-
-V
-squid:S1062"9Replace this use of System.out or System.err by a logger.(ÕĞ± 8·×•’²-
-usquid:UselessImportCheck"ERemove this unused import 'javax.persistence.criteria.CriteriaQuery'.(ıŞ§ÿÿÿÿÿ8³íã²-
-]squid:S1118":Add a private constructor to hide the implicit public one.(ÁÒ„†üÿÿÿÿ8ªğ–‘²-
-psquid:S001176"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯°›8·×•’²-
-csquid:UselessImportCheck"3Remove this unused import 'org.hibernate.Criteria'.(öÏ¨ÿÿÿÿÿ8‘ÍÔ²-

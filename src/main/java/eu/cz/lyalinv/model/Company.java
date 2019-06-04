@@ -13,7 +13,7 @@ import java.util.Set;
 public class Company {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Long ICO;
@@ -29,13 +29,17 @@ public class Company {
 
     private Date mtime;
 
-    public Company () {
+    public Company() {
         employees = new HashSet();
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getICO() {
         return ICO;
