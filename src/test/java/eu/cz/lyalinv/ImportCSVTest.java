@@ -3,16 +3,20 @@ package eu.cz.lyalinv;
 import eu.cz.lyalinv.controller.DBController;
 import eu.cz.lyalinv.controller.ImportController;
 import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.model.Employee;
+import eu.cz.lyalinv.utils.model.Stat;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 
@@ -32,10 +36,10 @@ public class ImportCSVTest {
         assertNotNull(dataContainer);
         assertNotNull(dataContainer.getCompanyList());
         assertNotNull(dataContainer.getEmployeeList());
-        DBController.storeData(dataContainer);
     }
 
-    private void moveFilesBack (){
+
+    public static void moveFilesBack (){
         try (Stream<Path> walk = Files.walk(Paths.get(projectsFolder + resourcesFolder + out))) {
             List<String> files = walk.filter(Files::isRegularFile).map(Path::toString).collect(Collectors.toList());
             for ( String file : files ){

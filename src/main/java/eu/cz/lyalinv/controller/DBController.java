@@ -4,7 +4,9 @@ import eu.cz.lyalinv.model.Company;
 import eu.cz.lyalinv.model.DataContainer;
 import eu.cz.lyalinv.model.Employee;
 import eu.cz.lyalinv.utils.model.Stat;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,11 +19,12 @@ import java.util.List;
  * @author Lyalin Valeriy (lyalival)
  */
 public class DBController {
+
     public static Stat storeData (DataContainer dataContainer){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.businessdbapp.jpa");
         Stat stat = new Stat();
         boolean isPotentialDuplicate = false;
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.businessdbapp.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Session session = entityManager.unwrap(Session.class);
         EntityTransaction transaction = entityManager.getTransaction();
@@ -43,7 +46,6 @@ public class DBController {
             else if ( oldCompany.getMtime().compareTo(newCompany.getMtime()) == 0 ){
                 isPotentialDuplicate = true;
             }
-
         }
 
         for ( Employee newEmployee : dataContainer.getEmployeeList() ) {
@@ -64,13 +66,32 @@ public class DBController {
             else if ( oldEmployee.getMtime().compareTo(newEmployee.getMtime()) == 0 && isPotentialDuplicate){
                 stat.duplication++;
             }
-
         }
         transaction.commit();
 
         entityManagerFactory.close();
         System.out.println("successfully saved");
         return stat;
+    }
+
+    public static List<Employee> getEmployees (){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.businessdbapp.jpa");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Session session = entityManager.unwrap(Session.class);
+        Transaction tx = null;
+        List<Employee> employees = null;
+        try {
+            tx = session.beginTransaction();
+            employees = session.createQuery("FROM Employee").list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+            entityManagerFactory.close();
+        }
+        return employees;
     }
 
     private static void updateCompany ( Company oldCompany, Company newCompany){
