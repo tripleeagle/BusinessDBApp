@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 /**
  * @author Lyalin Valeriy (lyalival)
  */
-public class MainController {
+public class ImportController {
     /**
      * Iterates all the files in the @inputPathToDirectory folder
      * @param inputPathToDirectory - path to the folder, where is located input files
@@ -54,4 +54,5 @@ public class MainController {
 
         return temp == null ? false : true;
     }
+
 }

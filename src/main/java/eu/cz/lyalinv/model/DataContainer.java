@@ -1,5 +1,6 @@
 package eu.cz.lyalinv.model;
 
+import javax.persistence.Entity;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

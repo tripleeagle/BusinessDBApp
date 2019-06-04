@@ -1,5 +1,6 @@
 package eu.cz.lyalinv.model;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -8,14 +9,22 @@ import java.util.Set;
 /**
  * @author Lyalin Valeriy (lyalival)
  */
+@Entity
 public class Company {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
 
     private Long ICO;
 
     private String companyName;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Address address;
 
+    @OneToMany(mappedBy = "company")
     private Set<Employee> employees;
 
     private Date mtime;
@@ -23,6 +32,10 @@ public class Company {
     public Company () {
         employees = new HashSet();
     }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 
     public Long getICO() {
         return ICO;

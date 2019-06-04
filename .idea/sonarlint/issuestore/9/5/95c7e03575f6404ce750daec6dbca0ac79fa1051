@@ -1,0 +1,7 @@
+
+]squid:S1118":Add a private constructor to hide the implicit public one.(ÜÅÎÿÿÿÿÿ8Şåîö±-
+Fsquid:S1148,"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Şåîö±-
+Gsquid:S11257")Remove the literal "false" boolean value.(é¼‚8ğ‚ŠŠ²-
+Osquid:S1481"2Remove this unused "dataContainer" local variable.(³Îˆ8Şåîö±-
+V
+squid:S106)"9Replace this use of System.out or System.err by a logger.(•áÊ¢8Şåîö±-

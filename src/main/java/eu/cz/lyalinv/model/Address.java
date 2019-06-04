@@ -1,9 +1,19 @@
 package eu.cz.lyalinv.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * @author Lyalin Valeriy (lyalival)
  */
+@Entity
 public class Address {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
 
     private String street;
 
@@ -11,10 +21,20 @@ public class Address {
 
     private String country;
 
+    public Address(){}
+
     public Address(String street, String city, String country) {
         this.street = street;
         this.city = city;
         this.country = country;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStreet() {

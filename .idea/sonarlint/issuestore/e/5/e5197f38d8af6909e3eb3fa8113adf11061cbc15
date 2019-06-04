@@ -1,0 +1,12 @@
+
+osquid:UselessImportCheck	"?Remove this unused import 'org.hibernate.boot.MetadataSources'.(çÂÙáÿÿÿÿÿ8©·ÆŠ²-
+asquid:UselessImportCheck"6Remove this unused import 'org.hibernate.Transaction'.(ìÌè³8©·ÆŠ²-
+V
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÕÐ± 8ºÄ•Š²-
+‡squid:UselessImportCheck"WRemove this unused import 'org.hibernate.boot.registry.StandardServiceRegistryBuilder'.(ƒ©¡üøÿÿÿÿ8©·ÆŠ²-
+{squid:UselessImportCheck
+"PRemove this unused import 'org.hibernate.boot.registry.StandardServiceRegistry'.(Û‹ÜŒ8©·ÆŠ²-
+]squid:S1118":Add a private constructor to hide the implicit public one.(ÁÒ„†üÿÿÿÿ8µÞ¤Š²-
+hsquid:UselessImportCheck"8Remove this unused import 'org.hibernate.boot.Metadata'.(ò•Šÿûÿÿÿÿ8©·ÆŠ²-
+isquid:UselessImportCheck"9Remove this unused import 'org.hibernate.SessionFactory'.(ñ¦«¬þÿÿÿÿ8©·ÆŠ²-
+bsquid:UselessImportCheck"2Remove this unused import 'org.hibernate.Session'.(È¹›§ùÿÿÿÿ8óÓÌŠ²-

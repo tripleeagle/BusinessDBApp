@@ -1,6 +1,7 @@
 package eu.cz.lyalinv;
 
-import eu.cz.lyalinv.controller.MainController;
+import eu.cz.lyalinv.controller.DBController;
+import eu.cz.lyalinv.controller.ImportController;
 import eu.cz.lyalinv.model.DataContainer;
 import org.junit.Test;
 
@@ -26,11 +27,12 @@ public class ImportCSVTest {
 
     @Test
     public void testImportCSV (){
-        DataContainer dataContainer = MainController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + input, projectsFolder + resourcesFolder + out);
+        DataContainer dataContainer = ImportController.importCSVFromFolderAndMove(projectsFolder + resourcesFolder + input, projectsFolder + resourcesFolder + out);
+        moveFilesBack();
         assertNotNull(dataContainer);
         assertNotNull(dataContainer.getEmployeeMap());
         assertNotNull(dataContainer.getCompanyMap());
-        moveFilesBack();
+        DBController.storeData(dataContainer);
     }
 
     private void moveFilesBack (){
