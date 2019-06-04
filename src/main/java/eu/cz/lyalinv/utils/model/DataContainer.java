@@ -1,4 +1,7 @@
-package eu.cz.lyalinv.model;
+package eu.cz.lyalinv.utils.model;
+
+import eu.cz.lyalinv.model.Company;
+import eu.cz.lyalinv.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@ package eu.cz.lyalinv.controller;
 import com.opencsv.bean.CsvToBeanBuilder;
 import eu.cz.lyalinv.dto.CSV.CSVImportConverter;
 import eu.cz.lyalinv.dto.CSV.model.CSVRow;
-import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.utils.model.DataContainer;
 
 import java.io.IOException;
 import java.io.Reader;

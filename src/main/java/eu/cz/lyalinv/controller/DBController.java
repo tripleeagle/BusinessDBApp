@@ -1,7 +1,7 @@
 package eu.cz.lyalinv.controller;
 
 import eu.cz.lyalinv.model.Company;
-import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.utils.model.DataContainer;
 import eu.cz.lyalinv.model.Employee;
 import eu.cz.lyalinv.utils.model.Stat;
 import org.hibernate.HibernateException;

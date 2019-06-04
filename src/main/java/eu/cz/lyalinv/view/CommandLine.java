@@ -3,7 +3,7 @@ package eu.cz.lyalinv.view;
 import eu.cz.lyalinv.controller.DBController;
 import eu.cz.lyalinv.controller.ImportController;
 import eu.cz.lyalinv.model.Company;
-import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.utils.model.DataContainer;
 import eu.cz.lyalinv.model.Employee;
 import eu.cz.lyalinv.utils.model.Stat;
 

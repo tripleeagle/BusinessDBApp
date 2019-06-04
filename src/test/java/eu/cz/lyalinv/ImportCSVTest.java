@@ -1,7 +1,7 @@
 package eu.cz.lyalinv;
 
 import eu.cz.lyalinv.controller.ImportController;
-import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.utils.model.DataContainer;
 import org.junit.Test;
 
 import java.io.IOException;

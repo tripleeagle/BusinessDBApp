@@ -3,7 +3,7 @@ package eu.cz.lyalinv.dto.CSV;
 import eu.cz.lyalinv.dto.CSV.model.CSVRow;
 import eu.cz.lyalinv.model.Address;
 import eu.cz.lyalinv.model.Company;
-import eu.cz.lyalinv.model.DataContainer;
+import eu.cz.lyalinv.utils.model.DataContainer;
 import eu.cz.lyalinv.model.Employee;
 
 import java.sql.Date;
